@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment Gateway Integration</title>
+</head>
+<body>
+    <h1>Checkout</h1>
+    <div>
+        <label for="amount">Amount: </label>
+        <input type="text" id="amount" placeholder="Enter amount">
+    </div>
+    <button id="payButton">Pay Now</button>
+
+    <script src="https://example-payment-gateway.com/payment-gateway.js"></script>
+    <script>
+        // Initialize the payment gateway (This code is hypothetical, use the actual initialization code provided by your payment gateway provider)
+        const paymentGateway = new PaymentGateway({
+            apiKey: 'your-api-key',
+            environment: 'sandbox', // or 'production'
+        });
+
+        // Handle the payment process when the 'Pay Now' button is clicked
+        document.getElementById('payButton').addEventListener('click', () => {
+            const amount = document.getElementById('amount').value;
+
+            // Create a payment request
+            const paymentRequest = {
+                amount: parseFloat(amount),
+                currency: 'USD',
+                description: 'Purchase description',
+            };
+
+            // Process the payment
+            paymentGateway.processPayment(paymentRequest, (response) => {
+                if (response.success) {
+                    alert('Payment successful! Transaction ID: ' + response.transactionId);
+                } else {
+                    alert('Payment failed. Error: ' + response.error);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
