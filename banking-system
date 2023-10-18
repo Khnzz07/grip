@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Basic Banking System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #balance {
+            font-size: 24px;
+            text-align: center;
+        }
+
+        #amount {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        #transaction {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        #button {
+            width: 100%;
+            padding: 10px;
+            background-color: #0074d9;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        #button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Banking System</h1>
+        <div id="balance">Balance: $1000</div>
+        <input id="amount" type="number" placeholder="Enter Amount">
+        <select id="transaction">
+            <option value="deposit">Deposit</option>
+            <option value="withdraw">Withdraw</option>
+        </select>
+        <button id="button" onclick="processTransaction()">Submit</button>
+    </div>
+
+    <script>
+        let balance = 1000;
+
+        function processTransaction() {
+            let amount = parseFloat(document.getElementById("amount").value);
+            let transaction = document.getElementById("transaction").value;
+
+            if (isNaN(amount) || amount <= 0) {
+                alert("Please enter a valid amount.");
+                return;
+            }
+
+            if (transaction === "deposit") {
+                balance += amount;
+            } else if (transaction === "withdraw") {
+                if (amount > balance) {
+                    alert("Insufficient balance.");
+                    return;
+                }
+                balance -= amount;
+            }
+
+            document.getElementById("balance").innerText = `Balance: $${balance.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>
